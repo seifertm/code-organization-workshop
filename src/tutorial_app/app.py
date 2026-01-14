@@ -1,14 +1,12 @@
 import spacy
 from fastapi import FastAPI, HTTPException
-from pathlib import Path
 from pydantic import BaseModel
 from typing import Optional
-import json
+
+from tutorial_app.json_db import load_products, save_products
 
 
 app = FastAPI()
-
-DATABASE_PATH = Path("products.json")
 
 
 class Product(BaseModel):
@@ -17,23 +15,6 @@ class Product(BaseModel):
     description: str
     price: int
     """Price in Euro cents"""
-
-
-if not DATABASE_PATH.exists():
-    with DATABASE_PATH.open("w") as file:
-        json.dump([], file)
-
-
-def load_products() -> list[dict]:
-    """Load all products from the database file."""
-    with DATABASE_PATH.open("r") as file:
-        return json.load(file)
-
-
-def save_products(products: list[dict]) -> None:
-    """Save all products to the database file."""
-    with DATABASE_PATH.open("w") as file:
-        json.dump(products, file, indent=2)
 
 
 @app.get("/products")

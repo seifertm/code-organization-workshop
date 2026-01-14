@@ -18,7 +18,8 @@ Implement each test case that is currently being skipped. Remember to run `uv ru
 import pytest
 from fastapi.testclient import TestClient
 
-from tutorial_app.app import DATABASE_PATH, app, Product
+from tutorial_app.app import app, Product
+from tutorial_app.json_db import DATABASE_PATH
 
 http = TestClient(app)
 
