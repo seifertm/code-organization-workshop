@@ -19,7 +19,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from tutorial_app.app import app, Product
-from tutorial_app.json_db import DATABASE_PATH
+from tutorial_app.tsv_db import DATABASE_PATH
 
 http = TestClient(app)
 
@@ -98,7 +98,7 @@ def test_creating_and_deleting_a_product_does_not_modify_the_product_list():
 
 def test_similarity_between_products():
     # Unlike other API endpoints, this endpoint uses query parameters to specify product IDs
-    # see https://www.python-httpx.org/compatibility/#query-parameters
+    # see https://www.python-httpx.org/api/#client on how to specify query parameters in an HTTPX request
     product0 = Product(
         name="Test Product",
         description="A product for testing",

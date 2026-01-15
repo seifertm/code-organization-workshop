@@ -11,3 +11,4 @@ wheels/
 
 # database file
 products.json
+products.tsv
