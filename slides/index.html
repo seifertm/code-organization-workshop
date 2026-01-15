@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Code Organization Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme" />
+    <style>
+      .reveal section img { max-width: 100%; }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Use Markdown to write slides in slides.md -->
+        <section
+          data-markdown="slides.md"
+          data-separator="^\n---\n$"
+          data-separator-vertical="^\n--\n$"
+          data-separator-notes="^Notes?:"
+        ></section>
+      </div>
+    </div>
+
+    <script src="node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script>
+      const deck = new Reveal({
+        hash: true,
+        slideNumber: true,
+        plugins: [RevealMarkdown, RevealNotes],
+      });
+      deck.initialize();
+    </script>
+  </body>
+</html>
