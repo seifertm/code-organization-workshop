@@ -7,7 +7,7 @@ tested in the respective function.
 When all tests are implemented, most code in app.py should be run at least once when running the test suite.
 Executing a specific piece of code is the absolute minimum a test case should do. Ideally, the test makes some
 assertions on the result that a specific piece of code provides. This allows us to *verify* that our web application
-does what we intend it do. In a way, tests serve as an executable specification of the software we're building.
+does what we intend it to do. In a way, tests serve as an executable specification of the software we're building.
 For the intents and purposes of this workshop, the tests will help us catch error that we introduce by accident.
 
 One test case has already be implemented. Other tests are currently skipped.
