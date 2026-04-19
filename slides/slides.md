@@ -125,7 +125,7 @@ Notes:
 
 ## Summary
 
-- Testing and refactoring are not and end in itself. Both serve a purpose.
+- Testing and refactoring are not an end in itself. Both serve a purpose.
 - Be conscious about whether you're currently taking a shortcut or not <!-- .element: class="fragment" -->
 - Make mistakes and learn from them <!-- .element: class="fragment" -->
 
