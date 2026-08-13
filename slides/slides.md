@@ -1,6 +1,6 @@
-## Code Organization for non-engineers
+## Code Organization Workshop
 
-2026-07-13 – Michael Seifert
+2026-08-13 – Michael Seifert
 
 Notes:
 - Out of scope:
@@ -188,8 +188,8 @@ Notes:
 
 ## Take aways
 
-- Dependency injection moves cohesion in our call stack
-- Keep cohesion high
+- Dependency injection means we request dependencies from the caller, instead of handling them ourselves
+- Can help manage cohesion when used to improve layer separation <!-- .element: class="fragment" -->
 
 ---
 
