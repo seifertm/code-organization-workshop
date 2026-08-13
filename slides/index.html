@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css" />
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css" id="theme" />
     <style>
       .reveal section img { max-width: 100%; }
+      .reveal pre code { max-height: 600px; }
     </style>
   </head>
   <body>
@@ -26,13 +28,15 @@
     <script src="node_modules/reveal.js/dist/reveal.js"></script>
     <script src="node_modules/reveal.js/plugin/markdown/markdown.js"></script>
     <script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+    <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
     <script>
       const deck = new Reveal({
         hash: true,
         slideNumber: true,
-        plugins: [RevealMarkdown, RevealNotes],
+        plugins: [RevealMarkdown, RevealNotes, RevealHighlight],
+        pdfSeparateFragments: false
       });
-      deck.initialize();
+      deck.initialize({});
     </script>
   </body>
 </html>
