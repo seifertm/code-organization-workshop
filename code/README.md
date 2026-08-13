@@ -58,12 +58,12 @@ Think of ways to make it easier for the reader to understand which attributes re
 
 # Part 2: Structuring Code Across Modules
 
-## Exercise 4 (group exercise)
+## Exercise 1 (group exercise)
 
 Explain the purpose of the `src/tutorial_app/app.py` module in one sentence.
 
 
-## Exercise 5
+## Exercise 2
 
 The module `src/tutorial_app/app.py` has many different responsibilities. We're still not done replacing The JSON Database.
 
@@ -78,7 +78,7 @@ Look at the file `src/tutorial_app/app.py`. Notice how all imports related to Th
 Module imports are usually a good indication how many different responsibilities a module has. If a module uses imports from many different layers of your application, it likely has many responsibilities. Multiple responsibilities introduce complexity, which makes the module harder to understand. A module with few unrelated imports is very focused. This is called high *cohesion* in software engineering terms and is very desirable. We prefer modules with high cohesion.
 
 
-## Exercise 6
+## Exercise 3
 
 Create a new module `src/tutorial_app/tsv_db.py`.
 Use the [csv module](https://docs.python.org/3/library/csv.html) from the Python standard library to implement the functions `save_products` and `load_products` in the new module. Keep the function signatures the same as in `json_db.py`.
@@ -110,7 +110,7 @@ To hide the actual database implementation from its callers, software engineers 
 
 # Part 3: Training Wheels are Off
 
-## Exercise 7
+## Exercise 1
 
 The existing approach to computing the similarity score between two product names or descriptions uses word embeddings and cosine similarity. You found out that a similarity score using the Levenshtein distance is less computationally expensive, while yielding good enough results. The business wants you to switch to the Levenshtein scoring.
  
@@ -124,4 +124,27 @@ Note: You can use [Levenshtein.ratio](https://rapidfuzz.github.io/Levenshtein/le
 
 ## Bonus Exercise 1
 FastAPI allows grouping API endpoints via the [ApiRouter](https://fastapi.tiangolo.com/tutorial/bigger-applications/) class. Separate the endpoints for similarity scoring from the endpoints that provide operations on products into different modules. 
+
+
+# Part 4: Dependency Injection
+
+The database module uses a hard-coded path pointing to the database file. This is fine for educational purposes, but isn't practical in real scenarios where you will want to have at least a test database and a production database.
+We also notice that the target database for the load and save operations are always the same. We don't have a case where we want to load from one database and save to another or vice versa. Therefore, the path to the database file represents shared information of the load and save functions. We can represent shared state across multiple functions in a class.
+
+## Exercise 1
+
+Create the class *TsvDb* that takes the path to the database file as a constructor argument and stores the path as a class attribute for later use. The functions *load_products* and *save_products* should become methods of that class and access the stored database path.
+
+## Exercise 2
+
+Use [FastAPI's dependency injection mechanism](https://fastapi.tiangolo.com/tutorial/dependencies/#first-steps) to inject an instance of the database class into the endpoints.
+
+## Bonus Exercise 1
+
+Dependency injection is not exclusive to classes and object-oriented code.
+
+Revert the refactoring in Exercise 1 so that *load_products* and *save_products* are standalone (module-level) functions that take the database path as an argument.
+
+Use [functools.partial](https://docs.python.org/3/library/functools.html#functools.partial) to "pre-configure" the functions when creating the dependencies in app.py.
+
 
