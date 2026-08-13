@@ -1,4 +1,6 @@
-## Code Organization Workshop
+## Code Organization for non-engineers
+
+2026-07-13 – Michael Seifert
 
 Notes:
 - Out of scope:
@@ -25,7 +27,8 @@ A component's degree of focus.
 1. Structuring Code within a Module
 1. Structuring Code across Modules <!-- .element: class="fragment" -->
 1. Training Wheels are Off <!-- .element: class="fragment" -->
-1. Summary <!-- .element: class="fragment" -->
+1. Dependency Injection <!-- .element: class="fragment" -->
+1. Recap <!-- .element: class="fragment" -->
 
 ---
 
@@ -34,6 +37,7 @@ A component's degree of focus.
 --
 
 ## Hands On
+`git clone https://github.com/seifertm/code-organization-workshop.git`
 
 --
 
@@ -121,18 +125,96 @@ Notes:
 
 ## Hands On
 
+--
+
+## Discussion
+
+---
+
+## Part 4: Dependency Injection
+
+--
+
+``` python
+def migrate_data():
+    json_db_settings = load_database_config(…)
+    json_db = init_database(…)
+
+    tsv_db_settings = load_database_config(…)
+    tsv_db = init_database(…)
+
+    products = json_db.load_products(…)
+    tsv_db.save_products(products)
+
+    json_db.close()
+    tsv_db.close()
+```
+
+Notes:
+- How can you test this function?
+- How cohesive is this function?
+
+--
+
+``` python
+def migrate_data(json_db, tsv_db):
+    products = json_db.load_products(…)
+    tsv_db.save_products(products)
+```
+
+``` python
+def main():
+    json_db_settings = load_database_config(…)
+    json_db = init_database(…)
+
+    tsv_db_settings = load_database_config(…)
+    tsv_db = init_database(…)
+
+    migrate_data(json_db, tsv_db)
+
+    json_db.close()
+    tsv_db.close()
+```
+
+Notes:
+- Migrate data is easier to test in isolation
+- Database setup code was hoisted up. It is reusable at a higher level
+
+--
+
+## Hands On
+
+--
+
+## Take aways
+
+- Dependency injection moves cohesion in our call stack
+- Keep cohesion high
+
+---
+
+## Recap
+
+1. Structuring Code within a Module
+1. Structuring Code across Modules <!-- .element: class="fragment" -->
+1. Training Wheels are Off <!-- .element: class="fragment" -->
+1. Dependency Injection <!-- .element: class="fragment" -->
+
 ---
 
 ## Summary
 
 - Testing and refactoring are not an end in itself. Both serve a purpose.
 - Be conscious about whether you're currently taking a shortcut or not <!-- .element: class="fragment" -->
-- Make mistakes and learn from them <!-- .element: class="fragment" -->
+- Make mistakes and learn from them (=> go back to your old code) <!-- .element: class="fragment" -->
 
 ---
 
 ## Feedback
 
+<figure class="r-stretch">
+    <img src="feedback.svg" width="600px" height="auto" style="object-fit: contain;" />
+</figure>
 
 ---
 
